@@ -45,13 +45,12 @@ class CharacterView: UIView {
         super.layoutSubviews()
         self.background.frame = CGRect.init(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
         self.addSubview(background)
-        updateImage()
         self.addSubview(self.imageView)
     }
 
     //更新图片状态
     func updateImage() {
-        if self.tag == 0 {
+        if self.type == 0 {
             self.imageView.animationImages = self.monsterImageSet
         }else{
             self.imageView.animationImages = self.animalImageSet
@@ -60,7 +59,7 @@ class CharacterView: UIView {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        self.reverseType()
     }
     
     //设置类型
@@ -71,7 +70,7 @@ class CharacterView: UIView {
     
     //翻转类型
     func reverseType() {
-        if self.tag == 0 {
+        if self.type == 0 {
             setType(type: 1)
         }else{
             setType(type: 0)

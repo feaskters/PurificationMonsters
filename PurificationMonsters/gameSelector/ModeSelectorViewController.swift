@@ -62,6 +62,11 @@ class ModeSelectorViewController: UIViewController {
                 })
                 break
             case 1:
+                let gvc = GameViewController.init(nibName: nil, bundle: nil)
+                gvc.setTag(tag: 1)
+                self.present(gvc, animated: false, completion: {
+                self.reloadInputViews()
+            })
                 break
             case 2:
                 let vc = LevelSelectorViewController.init(nibName: nil, bundle: nil)

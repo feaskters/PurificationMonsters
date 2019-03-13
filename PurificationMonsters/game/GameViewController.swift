@@ -24,23 +24,11 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        switch self.tag {
-        case 0:
-            tag0()
-            break
-        case 1:
-            tag1()
-            break
-        case 2:
-            tag2()
-            break
-        default:
-            break
-        }
+        tag(tag: self.tag)
     }
-
-    //处理tag0
-    func tag0() {
+    
+    //处理tag
+    func tag(tag:Int) {
         let scSquare :CGFloat = 400
         let characterSquare : CGFloat = 70
         let space : CGFloat = (scSquare - characterSquare * 5) / 6
@@ -50,21 +38,41 @@ class GameViewController: UIViewController {
                 let x = space + CGFloat(j) * (characterSquare + space)
                 let y = space + CGFloat(i) * (characterSquare + space)
                 let cv = CharacterView.init(frame: CGRect.init(x: x, y: y, width: characterSquare, height: characterSquare))
-                cv.setType(type: 0)
+                //获取type
+                var type = 0
+                switch tag{
+                case 0:
+                    type = tag0()
+                    break
+                case 1:
+                    type = tag1()
+                    break
+                case 2:
+                    type = tag2()
+                    break
+                default:
+                    break
+                }
                 self.gameView.addSubview(cv)
+                cv.setType(type: type)
                 self.characterArray[i].append(0)
+                }
             }
         }
+
+    //处理tag0
+    func tag0() -> Int{
+        return 0
     }
     
     //处理tag1
-    func tag1() {
-        
+    func tag1() -> Int{
+        return Int(arc4random() % 2)
     }
     
     //处理tag2
-    func tag2() {
-        
+    func tag2()  -> Int{
+        return 1
     }
     
     @IBAction func back(_ sender: UIButton) {
