@@ -20,6 +20,8 @@
 		F71D95A42238BE170085DEC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71D95A32238BE170085DEC6 /* ViewController.swift */; };
 		F71D95A82238D7B50085DEC6 /* ModeSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71D95A62238D7B50085DEC6 /* ModeSelectorViewController.swift */; };
 		F71D95A92238D7B50085DEC6 /* ModeSelectorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F71D95A72238D7B50085DEC6 /* ModeSelectorViewController.xib */; };
+		F7B585032238E3660087D8E3 /* LevelSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B585012238E3660087D8E3 /* LevelSelectorViewController.swift */; };
+		F7B585042238E3660087D8E3 /* LevelSelectorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7B585022238E3660087D8E3 /* LevelSelectorViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		F71D95A32238BE170085DEC6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F71D95A62238D7B50085DEC6 /* ModeSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectorViewController.swift; sourceTree = "<group>"; };
 		F71D95A72238D7B50085DEC6 /* ModeSelectorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeSelectorViewController.xib; sourceTree = "<group>"; };
+		F7B585012238E3660087D8E3 /* LevelSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectorViewController.swift; sourceTree = "<group>"; };
+		F7B585022238E3660087D8E3 /* LevelSelectorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LevelSelectorViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 			children = (
 				F71D95A62238D7B50085DEC6 /* ModeSelectorViewController.swift */,
 				F71D95A72238D7B50085DEC6 /* ModeSelectorViewController.xib */,
+				F7B585012238E3660087D8E3 /* LevelSelectorViewController.swift */,
+				F7B585022238E3660087D8E3 /* LevelSelectorViewController.xib */,
 			);
 			path = gameSelector;
 			sourceTree = "<group>";
@@ -172,6 +178,7 @@
 				F71D95802238BBC80085DEC6 /* Assets.xcassets in Resources */,
 				F71D95952238BBD80085DEC6 /* merge.mp3 in Resources */,
 				F71D95A02238BC1F0085DEC6 /* Main.storyboard in Resources */,
+				F7B585042238E3660087D8E3 /* LevelSelectorViewController.xib in Resources */,
 				F71D95A92238D7B50085DEC6 /* ModeSelectorViewController.xib in Resources */,
 				F71D95962238BBD80085DEC6 /* button_click.mp3 in Resources */,
 				F71D95982238BBD80085DEC6 /* BGM.mp3 in Resources */,
@@ -188,6 +195,7 @@
 			files = (
 				F71D95A82238D7B50085DEC6 /* ModeSelectorViewController.swift in Sources */,
 				F71D95972238BBD80085DEC6 /* Music.m in Sources */,
+				F7B585032238E3660087D8E3 /* LevelSelectorViewController.swift in Sources */,
 				F71D95792238BBC70085DEC6 /* AppDelegate.swift in Sources */,
 				F71D95A42238BE170085DEC6 /* ViewController.swift in Sources */,
 				F71D95992238BBD80085DEC6 /* Checkpoints.m in Sources */,

@@ -39,29 +39,34 @@ class ModeSelectorViewController: UIViewController {
         }
     }
     
-    /*
+    /*页面跳转
      sender.tag == 0 -> normal
      sender.tag == 1 -> Random
      sender.tag == 2 -> Level
      */
     @IBAction func selectMode(_ sender: UIButton) {
+        //播放音效
         Music.shared().musicPlayEffective()
-        switch sender.tag {
-        case 0:
-            break
-        case 1:
-            break
-        case 2:
-            break
-        default:
-            break
-        }
         //退出动画
         UIView.animate(withDuration: 1, animations: {
             self.containerView.alpha = 0
             self.containerView.transform = CGAffineTransform.init(scaleX: 2, y: 2)
         }) { (Bool) in
-            
+            self.containerView.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+            switch sender.tag {
+            case 0:
+                break
+            case 1:
+                break
+            case 2:
+                let vc = LevelSelectorViewController.init(nibName: nil, bundle: nil)
+                self.present(vc, animated: false, completion: {
+                    self.reloadInputViews()
+                })
+                break
+            default:
+                break
+            }
         }
         
     }
