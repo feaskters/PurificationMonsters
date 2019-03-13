@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         if getCurrentLanguage() == "cn"{
             tip.text = "玩法介绍: \n\t 将相应的数字拖到框中，使得每条线上连接的数字之和为10。"
         }else{
-            tip.text = "How to play: \n\t Drag the appropriate number into the box so that the sum of the numbers connected on each line is 10."
+            tip.text = "How to play: \n\t Click a block to purify monsters around it.Be cateful,these cute animals also can be changed to monsters around the block.Purify all monsters to win."
         }
         tip.textColor = #colorLiteral(red: 0.4470588235, green: 0.2705882353, blue: 0.09019607843, alpha: 1)
         view.addSubview(tip)

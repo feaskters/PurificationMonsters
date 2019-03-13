@@ -55,6 +55,11 @@ class ModeSelectorViewController: UIViewController {
             self.containerView.transform = CGAffineTransform.init(scaleX: 1, y: 1)
             switch sender.tag {
             case 0:
+                let gvc = GameViewController.init(nibName: nil, bundle: nil)
+                gvc.setTag(tag: 0)
+                self.present(gvc, animated: false, completion: {
+                    self.reloadInputViews()
+                })
                 break
             case 1:
                 break

@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LevelSelectorViewController" customModule="PurificationMonsters" customModuleProvider="target">
             <connections>
+                <outlet property="checkpointScrollView" destination="W0c-M0-J6J" id="qEq-eu-G8B"/>
                 <outlet property="containerView" destination="RJX-no-iMu" id="92A-Fo-n0v"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

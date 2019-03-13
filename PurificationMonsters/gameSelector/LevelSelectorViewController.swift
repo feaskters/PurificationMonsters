@@ -8,9 +8,12 @@
 
 import UIKit
 
-class LevelSelectorViewController: UIViewController {
+class LevelSelectorViewController: UIViewController,CheckpointButtonProtocol {
 
     @IBOutlet weak var containerView: UIView!
+
+    @IBOutlet weak var checkpointScrollView: UIScrollView!
+    private var checkPointButtons : Array<CheckPointButton> = Array.init()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +27,42 @@ class LevelSelectorViewController: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.containerView.alpha = 1
         }
+        if self.checkPointButtons.count != 0 {
+            //刷新按钮状态
+            for item in 0...self.checkPointButtons.count - 1{
+                self.checkPointButtons[item].setConfig(title: String(item + 1),enable: (Checkpoints.shared().checkPointsArray[item] as! Dictionary<String, Any>)["enable"] as! Bool)
+            }
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if self.checkPointButtons.count <= 0 {
+            let sc_width = UIScreen.main.bounds.width - 20
+            let btn_width : CGFloat = 100 //按钮宽度
+            let space : CGFloat = (sc_width - btn_width * 3) / 4 //按钮间距
+            print(space)
+            let count = Checkpoints.shared().checkPointsArray.count //按钮数量
+            //设置scrollview的contentsize
+            self.checkpointScrollView.contentSize = CGSize.init(width: self.checkpointScrollView.bounds.width , height: CGFloat((count + 2)/3 ) * (btn_width + space))
+            //添加按钮
+            for i in 0...count - 1  {
+                //初始化按钮
+                let x : CGFloat = CGFloat(i % 3) * (btn_width + space) + space
+                let y : CGFloat = CGFloat(i / 3) * (btn_width + space) + space
+                let checkpoint = CheckPointButton.init(frame: CGRect.init(x: x, y: y, width: btn_width, height: btn_width))
+                //设置按钮代理
+                checkpoint.delegate = self
+                checkpoint.tag = i
+                checkpoint.setConfig(title: String(i + 1), enable: (Checkpoints.shared().checkPointsArray[i] as! Dictionary<String, Any>)["enable"] as! Bool)
+                self.checkpointScrollView.addSubview(checkpoint)
+                self.checkPointButtons.append(checkpoint)
+            }
+        }
+    }
+    
+    //实现按钮代理协议
+    func CheckpointButtonClick(sender: CheckPointButton) {
+        print("click")
     }
 
     @IBAction func back(_ sender: UIButton) {
