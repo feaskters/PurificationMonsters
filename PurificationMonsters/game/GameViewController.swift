@@ -8,8 +8,10 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController,CharacterProtocol,GameOverProtocol {
 
+    @IBOutlet weak var clickCount: UILabel!
+    @IBOutlet weak var timeCount: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var gameView: UIView!
     /*
@@ -18,13 +20,19 @@ class GameViewController: UIViewController {
      tag == 2 -> level
      */
     private var tag = 0;
-    private var characterArray : Array<Array<Int>> = Array<Array<Int>>.init()
+    private var level = 1;
+    private var characterArray : Array<Array<CharacterView>> = Array<Array<CharacterView>>.init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         tag(tag: self.tag)
+        
+        //开始计时
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (Timer) in
+            self.timeCount.text = String(Int(self.timeCount.text!)! + 1)
+        }
     }
     
     //处理tag
@@ -48,14 +56,16 @@ class GameViewController: UIViewController {
                     type = tag1()
                     break
                 case 2:
-                    type = tag2()
+                    type = tag2(x:i,y:j)
                     break
                 default:
                     break
                 }
                 self.gameView.addSubview(cv)
                 cv.setType(type: type)
-                self.characterArray[i].append(0)
+                cv.setPosition(x: i, y: j)
+                cv.delegate = self
+                self.characterArray[i].append(cv)
                 }
             }
         }
@@ -71,8 +81,9 @@ class GameViewController: UIViewController {
     }
     
     //处理tag2
-    func tag2()  -> Int{
-        return 1
+    func tag2(x:Int,y:Int)  -> Int{
+        let array = Checkpoints.shared().checkPointsArray[self.level] as! Dictionary<String,Any>
+        return (array["blocks"]! as! Array<Array<Int>>)[y][x]
     }
     
     @IBAction func back(_ sender: UIButton) {
@@ -91,5 +102,73 @@ class GameViewController: UIViewController {
     
     func setTag(tag:Int) {
         self.tag = tag
+    }
+    func setLevel(level:Int ) {
+        self.level = level
+    }
+    
+    //代理方法，按钮点击事件
+    func characterClick(sender:CharacterView) {
+        
+        //点击次数增加
+        self.clickCount.text = String(Int(self.clickCount.text!)! + 1)
+        
+        let position = sender.getPosition()
+        //左边翻转
+        if position["x"]! > 0 {
+            self.characterArray[position["x"]! - 1][position["y"]!].reverseType()
+        }
+        //右边翻转
+        if position["x"]! < 4 {
+            self.characterArray[position["x"]! + 1][position["y"]!].reverseType()
+        }
+        //下边翻转
+        if position["y"]! < 4 {
+            self.characterArray[position["x"]!][position["y"]! + 1].reverseType()
+        }
+        //上边翻转
+        if position["y"]! > 0 {
+            self.characterArray[position["x"]!][position["y"]! - 1].reverseType()
+        }
+        judgeEnd()
+    }
+    
+    //判断结束
+    func judgeEnd() {
+        var flag = true //是否有无怪标致
+        for items in self.characterArray{
+            for item in items{
+                if item.getType() == 0{
+                    flag = false
+                }
+            }
+        }
+        if flag {
+            self.gameOver()
+            if self.tag == 2{
+                Checkpoints.shared().success(withLevel: Int32(self.level + 1))
+            }
+        }
+    }
+    
+    //弹出结算页面
+    func gameOver() {
+        let gov = GameOverView.init(frame: CGRect.init(x: 0, y: -300, width: self.containerView.frame.width, height: 300))
+        let result = ["click" : self.clickCount.text!,
+                      "time" : self.timeCount.text!]
+        gov.setResult(result: result)
+        gov.delegate = self
+        self.view.addSubview(gov)
+        UIView.animate(withDuration: 0.2) {
+            gov.frame = CGRect.init(x: 0, y: UIScreen.main.bounds.height / 2 - 150, width: self.containerView.frame.width, height: 300)
+        }
+    }
+    
+    //代理方法，游戏结束点击事件
+    func gameOverViewTouchsBegan(sender:GameOverView) {
+        self.back(UIButton.init())
+        UIView.animate(withDuration: 0.2) {
+            sender.frame = CGRect.init(x: 0, y: -300, width: self.containerView.frame.width, height: 300)
+        }
     }
 }

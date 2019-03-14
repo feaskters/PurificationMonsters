@@ -32,11 +32,12 @@ static Music *_instance;
     _instance.musiceffective.volume = 0.5;
     
     //初始化融合音效播放器
-    NSString *merge_path = [[NSBundle mainBundle]pathForResource:@"merge" ofType:@"mp3"];
+    NSString *merge_path = [[NSBundle mainBundle]pathForResource:@"merge" ofType:@"wav"];
     NSURL *merge_url = [NSURL URLWithString:merge_path];
     _instance.mergeEffectice = [[AVAudioPlayer alloc]initWithContentsOfURL:merge_url error:nil];
     _instance.mergeEffectice.volume = 0.5;
-    _instance.mergeEffectice.rate = 2;
+    _instance.mergeEffectice.enableRate = YES;
+    _instance.mergeEffectice.rate = 10;
     
     //初始化BGM播放器
     NSString *BGM_path = [[NSBundle mainBundle]pathForResource:@"BGM" ofType:@"mp3"];

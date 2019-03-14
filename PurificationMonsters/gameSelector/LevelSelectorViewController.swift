@@ -33,14 +33,11 @@ class LevelSelectorViewController: UIViewController,CheckpointButtonProtocol {
                 self.checkPointButtons[item].setConfig(title: String(item + 1),enable: (Checkpoints.shared().checkPointsArray[item] as! Dictionary<String, Any>)["enable"] as! Bool)
             }
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
+        
         if self.checkPointButtons.count <= 0 {
             let sc_width = UIScreen.main.bounds.width - 20
             let btn_width : CGFloat = 100 //按钮宽度
             let space : CGFloat = (sc_width - btn_width * 3) / 4 //按钮间距
-            print(space)
             let count = Checkpoints.shared().checkPointsArray.count //按钮数量
             //设置scrollview的contentsize
             self.checkpointScrollView.contentSize = CGSize.init(width: self.checkpointScrollView.bounds.width , height: CGFloat((count + 2)/3 ) * (btn_width + space))
@@ -62,7 +59,10 @@ class LevelSelectorViewController: UIViewController,CheckpointButtonProtocol {
     
     //实现按钮代理协议
     func CheckpointButtonClick(sender: CheckPointButton) {
-        print("click")
+        let gvc = GameViewController.init(nibName: nil, bundle: nil)
+        gvc.setTag(tag: 2)
+        gvc.setLevel(level: sender.tag)
+        self.present(gvc, animated: false, completion: nil)
     }
 
     @IBAction func back(_ sender: UIButton) {
