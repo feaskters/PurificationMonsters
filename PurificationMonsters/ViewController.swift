@@ -36,9 +36,9 @@ class ViewController: UIViewController {
         tip.numberOfLines = 0
         tip.font = UIFont.init(name: "Marker Felt", size: 18)
         if getCurrentLanguage() == "cn"{
-            tip.text = "玩法介绍: \n\t 将相应的数字拖到框中，使得每条线上连接的数字之和为10。"
+            tip.text = "玩法介绍: \n\t 点击一个区块来净化它和它周围的怪物。这些在方块周围可爱的动物也可以变成怪物。净化所有怪物赢得胜利。"
         }else{
-            tip.text = "How to play: \n\t Click a block to purify monsters around it.Be cateful,these cute animals also can be changed to monsters around the block.Purify all monsters to win."
+            tip.text = "How to play: \n\t Click a block to purify monsters around it.Be careful,these cute animals also can be changed to monsters around the block.Purify all monsters to win."
         }
         tip.textColor = #colorLiteral(red: 0.4470588235, green: 0.2705882353, blue: 0.09019607843, alpha: 1)
         view.addSubview(tip)

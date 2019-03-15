@@ -30,7 +30,11 @@ class GameOverView: UIView {
         self.background.frame = CGRect.init(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
         self.addSubview(self.background)
         //初始化标题
-        self.titleLabel.text = "CLEAR"
+        if SystemLanguageClass.getCurrentLanguage() == "cn"{
+            self.titleLabel.text = "净化完成"
+        }else{
+            self.titleLabel.text = "CLEAR"
+        }
         self.titleLabel.font = UIFont.init(name: "Marker Felt", size: 32)
         self.titleLabel.textColor = #colorLiteral(red: 0.4470588235, green: 0.2705882353, blue: 0.09019607843, alpha: 1)
         self.titleLabel.textAlignment = NSTextAlignment.center
@@ -62,8 +66,13 @@ class GameOverView: UIView {
     
     //设置结果
     func setResult(result:Dictionary<String,String>) {
-        self.clickLabel.text = "Click:" + result["click"]!
-        self.timeLabel.text = "Time:" + result["time"]!
+        if SystemLanguageClass.getCurrentLanguage() == "cn" {
+            self.clickLabel.text = "点击:" + result["click"]!
+            self.timeLabel.text = "时间:" + result["time"]!
+        }else{
+            self.clickLabel.text = "Click:" + result["click"]!
+            self.timeLabel.text = "Time:" + result["time"]!
+        }
     }
     
     //标题特效设置

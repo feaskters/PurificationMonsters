@@ -1,11 +1,3 @@
-//
-//  CharacterView.swift
-//  PurificationMonsters
-//
-//  Created by iOS123 on 2019/3/13.
-//  Copyright © 2019年 iOS123. All rights reserved.
-//
-
 import UIKit
 
 protocol CharacterProtocol {
@@ -133,4 +125,5 @@ class CharacterView: UIView {
     func getPosition() -> Dictionary<String,Int> {
         return self.position!
     }
+    
 }
